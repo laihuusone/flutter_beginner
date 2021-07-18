@@ -1,8 +1,6 @@
 import 'package:beginner/src/common/assets_common.dart';
 import 'package:beginner/src/models/exe4-weather-details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:convert';
 
 class ListViewWeatherDetail extends StatefulWidget {
   @override
@@ -11,7 +9,7 @@ class ListViewWeatherDetail extends StatefulWidget {
 
 class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
   bool expanded = false;
-  int dataTime = -1;
+  int toggleIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
       padding: EdgeInsets.symmetric(horizontal: 10),
       height: size.height * 0.767,
       child: FutureBuilder(
-          future: readJsonData(),
+          future: WeatherDetailModel.readJsonData(),
           builder: (context, data) {
             if (data.hasError) {
               return Center(
@@ -35,7 +33,7 @@ class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
                       children: [
                         InkWell(
                           onTap: () {
-                            toggleSubList(items, index);
+                            toggleSubList(index);
                           },
                           child: Card(
                             color: Colors.white,
@@ -121,7 +119,7 @@ class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
                         Container(
                           margin:
                               EdgeInsets.symmetric(horizontal: 4),
-                          height: (dataTime == items[index].weatherDateTime) && expanded
+                          height: (toggleIndex == index) && expanded
                               ? 80
                               : 0,
                           color: Colors.white,
@@ -149,9 +147,9 @@ class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
     );
   }
 
-  void toggleSubList(List<WeatherDetailModel> items, int index) {
+  void toggleSubList(int index) {
     return setState(() {
-      dataTime = items[index].weatherDateTime;
+      toggleIndex = index;
       expanded = !expanded;
     });
   }
@@ -172,13 +170,5 @@ class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
         )),
       ),
     );
-  }
-
-  Future<List<WeatherDetailModel>> readJsonData() async {
-    final jsondata =
-        await rootBundle.loadString("assets/datas/databydailyandhourly.json");
-    Map map = jsonDecode(jsondata);
-    List dailylist = map['daily'];
-    return dailylist.map((e) => WeatherDetailModel.fromJson(e)).toList();
   }
 }

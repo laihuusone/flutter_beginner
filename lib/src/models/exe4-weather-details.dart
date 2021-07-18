@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class WeatherDetailModel {
   late int weatherDateTime;
@@ -26,4 +28,11 @@ class WeatherDetailModel {
     weatherHumidity = json['humidity'];
   }
 
+  static Future<List<WeatherDetailModel>> readJsonData() async {
+    final jsondata =
+        await rootBundle.loadString("assets/datas/databydailyandhourly.json");
+    Map map = jsonDecode(jsondata);
+    List dailylist = map['daily'];
+    return dailylist.map((e) => WeatherDetailModel.fromJson(e)).toList();
+  }
 }
