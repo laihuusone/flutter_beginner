@@ -1,3 +1,4 @@
+import 'package:beginner/src/resources/exercise5.dart';
 import 'package:flutter/material.dart';
 import 'exercise1.dart';
 import 'exercise2.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
             exerciseButton(context, 'Exercise 2', Exercise2()),
             exerciseButton(context, 'Exercise 3', Exercise31()),
             exerciseButton(context, 'Exercise 4', Exercise4()),
+            exerciseButton(context, 'Exercise 5', Exercise5()),
           ],
         ),
       ),

@@ -16,7 +16,7 @@ class _ListViewWeatherDetailState extends State<ListViewWeatherDetail> {
     final Size size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
-      height: size.height * 0.767,
+      height: size.height * 0.764,
       child: FutureBuilder(
           future: WeatherDetailModel.readJsonData(),
           builder: (context, data) {

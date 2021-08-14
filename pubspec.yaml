@@ -29,6 +29,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
+  flutter_staggered_grid_view: ^0.4.0
+  carousel_slider: ^4.0.0
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +66,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: AtkinsonHyperlegible-Regular
+      fonts:
+        - asset: assets/fonts/AtkinsonHyperlegible-Regular.ttf
+    - family: AtkinsonHyperlegible-Bold
+      fonts:
+        - asset: assets/fonts/AtkinsonHyperlegible-Bold.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
